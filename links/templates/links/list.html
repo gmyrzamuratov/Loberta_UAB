@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+{% block content %}
+    {% load static %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mb-3">
+                <h4 class="text-center">Welcome {{ user.username }}</h4>
+            </div>
+        </div>
+        <h2 style="margin-top: 15px;">Links</h2>
+        <div class="form-group">
+            <label for="timer">Timer</label>
+            <input type="text" class="form-control" id="timer" aria-describedby="timerHelp" value="5">
+            <small id="timerHelp" class="form-text text-muted">In second.</small>
+        </div>
+        <table class="table" id="linksTable">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">URL</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for link in links %}
+                <tr id="link_{{forloop.counter}}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a href="{{link.url}}">{{link.url}}</a></td>
+                    <td>
+                        <button id="btn_{{ forloop.counter }}" type="button" class="btn btn-success" onclick="pause({{ forloop.counter }})">Active</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% block scripts %}
+       <script type="text/javascript" src="{% static '/js/links.js' %}"></script>
+    {% endblock %}
+{% endblock %}
