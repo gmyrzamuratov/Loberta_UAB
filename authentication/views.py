@@ -18,7 +18,7 @@ def login(request):
     user = authenticate(request, email=email, password=password)
     if user is not None:
         auth_login(request, user)
-        return redirect('main:index')
+        return redirect('links:index')
     else:
         error = {'message': 'Incorrect user or password', }
         return render(request, "authentication/signin.html", error)
@@ -36,7 +36,7 @@ def registration(request):
         user.is_active = True
         user.save()
 
-        return redirect('main:index')
+        return redirect('links:index')
     else:
         error = {'message': 'Password does not same', }
         return render(request, "authentication/signup.html", error)
